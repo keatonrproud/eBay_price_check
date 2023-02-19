@@ -35,7 +35,6 @@ plain_url = f"https://www.ebay.{country_dict[country_key]}/sch/i.html?LH_Complet
 # create lists of item names and the URLs to search through
 items = []
 urls = []
-
 for item in search_list:
     items.append(item)
     urls.append(plain_url.replace('REPLACE', item.replace(" ", "+")))
@@ -46,11 +45,13 @@ op = webdriver.ChromeOptions()
 op.add_argument('--headless')
 op.add_argument('--disable-gpu')
 
+# collect median prices and count of sales for each item
 medianPrices = []
 sales_count = []
 
 with webdriver.Chrome(service=srv, options=op) as drv:
     for url in urls:
+        # if url doesn't work, return invalid url message and go to next
         try:
             drv.get(url)
         except selenium.common.exceptions.InvalidArgumentException:
@@ -60,18 +61,19 @@ with webdriver.Chrome(service=srv, options=op) as drv:
         try:
             prices = drv.find_elements(By.CLASS_NAME, "s-item__price")
             prices.pop(0)
-            prices_list = []
+            prices_list = []        # collect list of all cleaned prices
             for price in prices:
-                price = price.get_attribute("innerHTML").replace(",", ".")
-                if price.count('.') > 1 or "STRIKETHROUGH" in price:
+                price = price.get_attribute("innerHTML").replace(",", ".")      # to account for european decimals
+                if price.count('.') > 1 or "STRIKETHROUGH" in price:        # to remove inaccurate prices from list
                     continue
-                price = float(re.sub(r'[^\d.]+', '', price))
+                price = float(re.sub(r'[^\d.]+', '', price))            # remove everything not a number or decimal
                 prices_list.append(price)
-            sales = int(len(prices_list))
-            middle = round(median(prices_list), 2)
+            sales = int(len(prices_list))                           # num of sales
+            middle = round(median(prices_list), 2)                  # median sale amount
         except:
             middle = "No prices found."
             sales = "No sales found."
+
         medianPrices.append(middle)
         sales_count.append(sales)
 
