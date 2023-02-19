@@ -89,7 +89,7 @@ You'll need to install [![Selenium][selenium-shield]][selenium-url], [chromedriv
    ```
 2. Install any missing packages
    ```sh
-   missing_package install
+   pip install missing_package
    ```
 3. Ensure you have Google Chrome installed
 
