@@ -3,6 +3,8 @@ import re
 import csv
 from statistics import median
 from datetime import datetime
+
+import selenium.common.exceptions
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
@@ -15,9 +17,9 @@ with open('search_list.csv', newline='') as infile:
 
 # country names with country website endings
 country_dict = {"canada": "ca", "usa": "com", "italy": "it", "australia": "com.au",
-                "austria": "au", "belgium": "be", "china": "cn", "france": "fr", "germany": "de", "hongkong": "hk",
-                "malaysia": "com.ml", "netherlands": "nl", "philippines": "ph", "singapore": "com.sg",
-                "spain": "com.es", "switzerland": "ch", "uk": "co.uk"}
+                "austria": "au", "belgium": "be", "france": "fr", "germany": "de", "malaysia": "com.my",
+                "netherlands": "nl", "philippines": "ph", "singapore": "com.sg", "spain": "com.es",
+                "switzerland": "ch", "uk": "co.uk"}
 
 # determine country to search in -- NOTE: the searches will be done using the languages inputted in the search_list.csv
 country_key = input("What country do you want to search in? ").lower().strip()
@@ -28,8 +30,7 @@ while not country_dict.get(country_key):
     country_key = input("Above are the available countries. Please input the country to search in: ").lower().strip()
 
 # create plain url with the country's code
-plain_url = f"https://www.ebay.{country_dict[country_key]}/sch/i.html?_odkw=REPLACE&LH_Complete=1&LH_Sold=1&_osacat=0" \
-            f"&_ipg=100&_from=R40&_trksid=m570.l1313&_nkw=REPLACE&_sacat=0"
+plain_url = f"https://www.ebay.{country_dict[country_key]}/sch/i.html?LH_Complete=1&LH_Sold=1&_from=R40&_nkw=REPLACE&_ipg=120"
 
 # create lists of item names and the URLs to search through
 items = []
@@ -50,15 +51,19 @@ sales_count = []
 
 with webdriver.Chrome(service=srv, options=op) as drv:
     for url in urls:
-        drv.get(url)
+        try:
+            drv.get(url)
+        except selenium.common.exceptions.InvalidArgumentException:
+            print(f'This url is invalid: {url}')
+            continue
 
         try:
             prices = drv.find_elements(By.CLASS_NAME, "s-item__price")
             prices.pop(0)
             prices_list = []
             for price in prices:
-                price = price.get_attribute("innerHTML")
-                if price.count('.') > 1:
+                price = price.get_attribute("innerHTML").replace(",", ".")
+                if price.count('.') > 1 or "STRIKETHROUGH" in price:
                     continue
                 price = float(re.sub(r'[^\d.]+', '', price))
                 prices_list.append(price)
@@ -70,13 +75,15 @@ with webdriver.Chrome(service=srv, options=op) as drv:
         medianPrices.append(middle)
         sales_count.append(sales)
 
+        print(f'Completed item {urls.index(url) + 1}')
+
 item_data = zip(items, medianPrices, sales_count)
 
 # create output csv with the data
 with open(f'output_{now}.csv', 'w', newline='') as outfile:
     writer = csv.writer(outfile)
     writer.writerow(["Items", "Prices", "Sales Incl.", "",
-                     f"Data is from {country_key} in their local currency and doesn't include shipping costs."])
+                     f"Data is from {country_key.upper()} in their local currency and doesn't include shipping fees."])
     for row in item_data:
         writer.writerow(row)
 
