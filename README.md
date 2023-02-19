@@ -16,7 +16,7 @@
 <h3 align="center">eBay Price Checker</h3>
 
   <p align="center">
-    Quickly checking prices of any number of items on eBay in the country you specify.
+    Quickly check the median recent sale price of any number of items on eBay in the country you specify.
     <br />
     <br />
     <a href="https://github.com/keatonrproud/eBay_price_check/issues">Report Bug</a>
