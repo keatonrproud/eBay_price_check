@@ -56,9 +56,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a small tool I use to review prices of items sold through eBay in the last few days. 
-
-I use it to price-check items before buying online or before listing items to sell online.
+This is a small tool I use to review prices of items sold through eBay in the last few days. I use it to price-check items before buying online or before listing items to sell online.
 
 
 ### Built With
@@ -78,7 +76,7 @@ Clone the repo, install the required scripts, and get to price checking! The mor
 
 ### Prerequisites
 
-You'll need to install [![Selenium][selenium-shield]][selenium-url], [chromedriver-autoinstaller](https://github.com/yeongbin-jo/python-chromedriver-autoinstaller), and [Google Chrome](https://www.google.com/chrome/) to get going with the script.
+You'll need to install [selenium][selenium-url], [chromedriver-autoinstaller](https://github.com/yeongbin-jo/python-chromedriver-autoinstaller), and [Google Chrome](https://www.google.com/chrome/) to get going with the script.
 
 
 ### Installation
