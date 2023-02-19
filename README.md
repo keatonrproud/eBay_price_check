@@ -78,6 +78,8 @@ Clone the repo, install the required scripts, and get to price checking! The mor
 
 You'll need to install [selenium][selenium-url], [chromedriver-autoinstaller](https://github.com/yeongbin-jo/python-chromedriver-autoinstaller), and [Google Chrome](https://www.google.com/chrome/) to get going with the script.
 
+The chromedriver version should automatically update based on your version of Chrome. If you have issues with the script, it would be worth ensuring your version of Chrome matches the chromedriver installed locally.
+
 
 ### Installation
 
