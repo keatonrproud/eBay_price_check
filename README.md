@@ -58,7 +58,7 @@
 
 This is a small tool I use to review prices of items sold through eBay in the last few days. 
 
-I use it to price-check actual sale amounts before buying online or for an accurate price for listing items online to sell.
+I use it to price-check items before buying online or before listing items to sell online.
 
 
 ### Built With
@@ -74,7 +74,7 @@ I use it to price-check actual sale amounts before buying online or for an accur
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Clone the repo, install the required scripts, and get to price checking!
+Clone the repo, install the required scripts, and get to price checking! The more specific your search, the more accurately the price will reflect your search.
 
 ### Prerequisites
 
