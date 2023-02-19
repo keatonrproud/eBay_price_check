@@ -3,7 +3,7 @@ import re
 import csv
 from statistics import median
 from datetime import datetime
-
+import chromedriver_autoinstaller
 import selenium.common.exceptions
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -39,8 +39,11 @@ for item in search_list:
     items.append(item)
     urls.append(plain_url.replace('REPLACE', item.replace(" ", "+")))
 
+# check if correct chromedriver version is installed, otherwise install the correct version to this script's path
+chromedriver_autoinstaller.install()
+
 # connect to chromedriver and launch
-srv = Service("\driver\chromedriver.exe")
+srv = Service("\chromedriver.exe")
 op = webdriver.ChromeOptions()
 op.add_argument('--headless')
 op.add_argument('--disable-gpu')
