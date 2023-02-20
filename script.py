@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 
+
 now = datetime.now().strftime("%H-%M_on_%d-%m-%Y")
 
 # convert csv to list of items to search for
