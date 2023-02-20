@@ -56,7 +56,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a small tool I use to review prices of items sold through eBay in the last few days. I use it to price-check items before buying online or before listing items to sell online.
+This is a small tool I use to review prices of items sold through eBay in the last few days. You can price estimates of items before buying or selling them yourself.
 
 
 ### Built With
@@ -72,7 +72,11 @@ This is a small tool I use to review prices of items sold through eBay in the la
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Clone the repo, install the required scripts, and get to price checking! The more specific your search, the more accurately the price will reflect your search.
+Clone the repo, install the required scripts, and get to price checking:
+
+1) View the sample_output file to see what your output will look like.
+2) Replace the items in search_list.csv with your own eBay searches. The more specific your search, the more accurately the price will reflect your search.
+3) Run the script and view your median search prices in the new output.
 
 ### Prerequisites
 
