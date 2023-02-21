@@ -86,7 +86,7 @@ with webdriver.Chrome(service=srv, options=op) as drv:
 item_data = zip(items, medianPrices, sales_count)
 
 # create output csv with the data
-with open(f'\outputs\output_{now}.csv', 'w', newline='') as outfile:
+with open(f'outputs\output_{now}.csv', 'w', newline='') as outfile:
     writer = csv.writer(outfile)
     writer.writerow(["Items", "Prices", "Sales Incl.", "",
                      f"Data is from {country_key.upper()} in their local currency and doesn't include shipping fees."])
