@@ -56,7 +56,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a small tool I use to review prices of items sold through eBay in the last few days. You can price estimates of items before buying or selling them yourself.
+This is a small tool I use to review prices of items sold through eBay in the last few days. You can get price estimates of items before buying or selling them yourself.
 
 
 ### Built With
